@@ -44,6 +44,19 @@ def onboard3():
         return redirect("/homepage")
     return render_template("onboard3.html")
 
+@app.route("/foodlog", methods=["GET", "POST"])
+def foodlog():
+    if request.method == "POST":
+        food_name = request.form.get("food_name")
+        calories = request.form.get("calories")
+
+        if "food_log" not in session: 
+            session["food_log"] = []
+        session["food_log"].append({"name": food_name, "calories": calories})
+        session.modified = True
+        return redirect("/homepage")
+    return render_template("foodlog.html")
+    
 @app.route("/homepage")
 def homepage():
     name = session.get("name")
@@ -68,17 +81,22 @@ def homepage():
     current_phase = get_current_phase(last_period)
     deficit = adjust_calories(tdee, current_phase)
 
-    descriptions = {
+    totalcal = 0
+    food_log = session.get("food_log", [])
+    for i in food_log: 
+        totalcal += int(i["calories"])
+    remaining = deficit - totalcal
+
+    phase_descriptions = {
         "Menstrual": "Your body is shedding its lining. Be sure to rest and eat lots of iron rich foods!",
         "Follicular": "Energy is going up! Best time to focus on your goals!",
         "Ovulation": "Peak Energy! Go reach those goals!",
         "Luteal": "Progesterone is rising! You deserve to eat a bit more, its normal!",
         "Unknown": "Track your cycle!"
     }
-    descriptions = descriptions.get(current_phase)
+    descriptions = phase_descriptions.get(current_phase)
 
-
-    return render_template("homepage.html", name=name, phase=current_phase, descriptions=descriptions, calories=deficit, tdee=tdee)
+    return render_template("homepage.html", name=name, phase=current_phase, descriptions=descriptions, calories=remaining, tdee=tdee)
 
 if __name__ == "__main__":
     app.run(debug=True)

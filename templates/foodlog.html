@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Phased</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    </head>
+    <body> 
+        <div class="main">
+            <form method="POST" action="/foodlog">
+                <div class="recipe_maker">
+                    <h2>Had a good meal? Let's track it!</h2>
+                    <input type="text" id="food_name" name="food_name" placeholder="Food Name">
+                    <input type="number" id="calories" name="calories" placeholder="Calorie Count">
+                    <button type="submit">Log Food</button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

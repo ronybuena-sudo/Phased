@@ -8,7 +8,7 @@
         <div class="header">
             <h3>Hi {{ name }}!</h3>
             <div class="head_buttons">
-                <button>+</button>
+                <a href="/foodlog"><button>+</button></a>
                 <button>:</button>
             </div>
         </div>
@@ -24,7 +24,10 @@
             </div>
             <div class="calorie_intake">
                 <div class="circle">
-                    <p>{{ calories }} kcal</p>
+                    <p>Remaining Calories:</p>
+                    <div class="number">
+                        <p>{{ calories }} kcal</p>
+                    </div>
                 </div>
                 <div class="descrip">
                     <p>Macros Report</p>

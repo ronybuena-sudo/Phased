@@ -33,6 +33,17 @@ p {
     padding-bottom: 10px;
 }
 
+a {
+    text-decoration: none;
+}
+
+.number {
+    color: #e08aa0;
+    font-size: 1rem;
+    padding-bottom: 10px;
+    font-weight: bold;
+}
+
 .phase_info, .calorie_intake {
     display: flex;
     align-items: center;
