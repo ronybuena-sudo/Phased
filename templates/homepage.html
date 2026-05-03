@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Phased</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='homepage.css') }}">
+    </head>
+    <body>
+        <div class="header">
+            <h3>Hi {{ name }}!</h3>
+            <div class="head_buttons">
+                <button>+</button>
+                <button>:</button>
+            </div>
+        </div>
+
+        <div class="main">
+            <div class="phase_info">
+                <div class="circle">
+                    <p>{{ phase }}</p>
+                </div>
+                <div class="descrip">
+                    <p>{{ descriptions }}</p>
+                </div>
+            </div>
+            <div class="calorie_intake">
+                <div class="circle">
+                    <p>{{ calories }} kcal</p>
+                </div>
+                <div class="descrip">
+                    <p>Macros Report</p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

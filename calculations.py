@@ -1,8 +1,5 @@
 from datetime import date
 # Basic calculations for phased app 
-
-lbs = True
-inches = True
 # Takes weight (kg), height (cm), age
 # Returns BMR as a float
 def calculate_bmr(weight, height, age, lbs, inches):
@@ -18,11 +15,10 @@ def calculate_bmr(weight, height, age, lbs, inches):
 # Returns TDEE as a float
 # use numbers from the PAL system
 def calculate_tdee(bmr, activity_level):
-    levels = {"little to no activity": 1.2,
-              "slightly active": 1.375,
+    levels = {"sedentary": 1.2,
+              "lightly active": 1.375,
               "moderately active": 1.55,
-              "very active": 1.725,
-              "extra active": 1.9}
+              "very active": 1.725,}
     tdee = bmr * levels[activity_level]
 
     return round(tdee,1)
@@ -36,15 +32,15 @@ def get_current_phase(last_period_date, cycle_length=28):
     current = (today - last_period_date).days
 
     if 0 <= current <= 4: 
-        phase = "menstrual"
-    elif 6 <= current <= 13: 
-        phase = "follicular"
+        phase = "Menstrual"
+    elif 5 <= current <= 13: 
+        phase = "Follicular"
     elif 14 <= current <= 16: 
-        phase = "ovulation"
+        phase = "Ovulation"
     elif 17 <= current <= cycle_length:
-        phase = "luteal"
+        phase = "Luteal"
     else:
-        phase = "unknown"
+        phase = "Unknown"
 
     return phase 
 

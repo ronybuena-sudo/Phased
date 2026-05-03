@@ -9,10 +9,11 @@
             <div class="glow"></div>
             <div class="content">
                 <h1>Your journey is only beginning</h1>
+                <form method="POST" action="/onboard2">
                 <div>
                     <h2>What's your goal weight?</h2>
-                    <input type="number" id="weight" name="weight" placeholder="Enter Your Weight">
-                    <select name="unit" id="unit">
+                    <input type="number" id="goal_weight" name="goal_weight" placeholder="Enter Your Weight">
+                    <select name="weight_unit" id="weight_unit">
                         <option value="kg">kg</option>
                         <option value="lbs">lbs</option>
                     </select>    
@@ -25,7 +26,8 @@
                         <option value=".5">-0.5 lb / -0.23 kg per week</option>
                     </select>
                 </div>
-                <a href="/onboard3"><button>Next</button></a>
+                <button type="submit">Next</button>
+                </form>
             </div>
         </div>
     </body>
