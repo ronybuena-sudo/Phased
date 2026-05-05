@@ -54,8 +54,17 @@ def foodlog():
             session["food_log"] = []
         session["food_log"].append({"name": food_name, "calories": calories})
         session.modified = True
+         
+        if "food_history" not in session: 
+            session["food_history"] = []
+        existing = [f["name"] for f in session["food_history"]]
+
+        if food_name not in existing:
+            session["food_history"].append({"name": food_name, "calories": calories})
+
         return redirect("/homepage")
-    return render_template("foodlog.html")
+    food_history = session.get("food_history", [])
+    return render_template("foodlog.html", food_history=food_history)
     
 @app.route("/homepage")
 def homepage():
@@ -96,7 +105,7 @@ def homepage():
     }
     descriptions = phase_descriptions.get(current_phase)
 
-    return render_template("homepage.html", name=name, phase=current_phase, descriptions=descriptions, calories=remaining, tdee=tdee)
+    return render_template("homepage.html", name=name, phase=current_phase, descriptions=descriptions, calories=round(remaining,1), tdee=tdee)
 
 if __name__ == "__main__":
     app.run(debug=True)

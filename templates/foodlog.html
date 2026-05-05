@@ -13,6 +13,16 @@
                     <input type="number" id="calories" name="calories" placeholder="Calorie Count">
                     <button type="submit">Log Food</button>
                 </div>
+
+                <div class="food_history">
+                    {% for food in food_history %}
+                    <form method="POST" action="/foodlog">
+                        <input type="hidden" name="food_name" value="{{ food.name }}">
+                        <input type="hidden" name="calories" value="{{ food.calories }}">
+                        <button type="submit">{{ food.name }} — {{ food.calories }} kcal</button>
+                    </form>
+                    {% endfor %}
+                </div>
             </form>
         </div>
     </body>
