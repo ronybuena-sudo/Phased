@@ -80,6 +80,12 @@ select {
     font-size: 1rem;
 }
 
+.back_button {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 .glow {
     position: absolute;
     top: 50%;

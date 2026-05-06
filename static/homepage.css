@@ -28,7 +28,7 @@ button {
 }
 
 p {
-    color: #e08aa0;
+    color: #b5546a;
     font-size: 1rem;
     padding-bottom: 10px;
 }
@@ -38,7 +38,7 @@ a {
 }
 
 .number {
-    color: #e08aa0;
+    color: #b5546a;
     font-size: 1rem;
     padding-bottom: 10px;
     font-weight: bold;
@@ -53,7 +53,7 @@ a {
 .descrip {
     width: 200px;
     padding: 30px;
-    border: 2px solid #e08aa0;
+    border: 3px solid #b5546a;
     border-radius: 25px;
     text-align:center;
 }
@@ -88,9 +88,14 @@ button:hover {
     width: 300px;
     height: 300px;
     border-radius: 50%;
-    border: 2px solid #e08aa0;
+    border: 3px solid #b5546a;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
+}
+
+.main {
+    background-color: #FAB9D5;
 }
