@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Phased</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    </head>
+    <body>
+        <a href="/homepage"><button class="back_button">Back to Home</button></a>
+        <div class="container">
+            <div class="glow"></div>
+            <div class="content">
+                <h1>Settings</h1>  
+                <form method="POST" action="/settings">
+                    <div> 
+                        <h2>Update Your Last Period</h2>
+                        <input type="date" id="period" name="period">
+                    </div>
+                    <div>
+                        <h2>Update Your Weight</h2>
+                        <input type="number" id="weight" name="weight">
+                        <select name="weight_unit" id="weight_unit">
+                            <option value="kg">kg</option>
+                            <option value="lbs">lbs</option>
+                        </select>
+                    </div>
+                    <div>
+                        <h2>Update Your Goal Weight</h2>
+                        <input type="number" id="goal_weight" name="goal_weight">
+                        <select name="weight_unit" id="weight_unit">
+                            <option value="kg">kg</option>
+                            <option value="lbs">lbs</option>
+                        </select>    
+                    </div>
+                    <div>
+                        <h2>Update Your Activity Level</h2>
+                        <select name="activity" id="activity">
+                            <option value="sedentary">Little to No Activity</option>
+                            <option value="lightly active">Lightly Active (1-3 days per week)</option>
+                            <option value="moderately active">Moderately Active (3-5 days per week)</option>
+                            <option value="very active">Very Active (6-7 days per week)</option>
+                        </select>    
+                    </div>
+                <button type="submit">Save Changes</button>
+            </form>   
+            </div>  
+        </div> 
+    </body>
+</html>

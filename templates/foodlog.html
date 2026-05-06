@@ -5,8 +5,9 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     </head>
     <body> 
-        <div class="main">
-            <a href="/homepage"><button class="back_button">Back to Home</button></a>
+        <a href="/homepage"><button class="back_button">Back to Home</button></a>
+        <div class="container">
+            <div class="glow"></div>
             <form method="POST" action="/foodlog">
                 <div class="recipe_maker">
                     <h2>Had a good meal? Let's track it!</h2>

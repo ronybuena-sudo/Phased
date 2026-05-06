@@ -107,5 +107,16 @@ def homepage():
 
     return render_template("homepage.html", name=name, phase=current_phase, descriptions=descriptions, calories=round(remaining,1), tdee=tdee)
 
+@app.route("/settings", methods=["GET", "POST"])
+def settings():
+    if request.method == "POST":
+        session["period"] = request.form.get("period")
+        session["weight"] = request.form.get("weight")
+        session["goal_weight"] = request.form.get("goal_weight")
+        session["activity"] = request.form.get("activity")
+        session["weight_unit"] = request.form.get("weight_unit")
+        return redirect("/homepage")
+    return render_template("settings.html")
+
 if __name__ == "__main__":
     app.run(debug=True)
