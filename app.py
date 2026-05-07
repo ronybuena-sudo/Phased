@@ -110,11 +110,16 @@ def homepage():
 @app.route("/settings", methods=["GET", "POST"])
 def settings():
     if request.method == "POST":
-        session["period"] = request.form.get("period")
-        session["weight"] = request.form.get("weight")
-        session["goal_weight"] = request.form.get("goal_weight")
-        session["activity"] = request.form.get("activity")
-        session["weight_unit"] = request.form.get("weight_unit")
+        if request.form.get("period"):
+            session["period"] = request.form.get("period")
+        if request.form.get("weight"):
+            session["weight"] = request.form.get("weight")
+        if request.form.get("weight_unit"):
+            session["weight_unit"] = request.form.get("weight_unit")
+        if request.form.get("goal_weight"):
+            session["goal_weight"] = request.form.get("goal_weight")
+        if request.form.get("activity"):
+            session["activity"] = request.form.get("activity")
         return redirect("/homepage")
     return render_template("settings.html")
 
