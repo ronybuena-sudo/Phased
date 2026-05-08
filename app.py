@@ -49,10 +49,13 @@ def foodlog():
     if request.method == "POST":
         food_name = request.form.get("food_name")
         calories = request.form.get("calories")
+        protein = request.form.get("protein")
+        carbs = request.form.get("carbs")
+        fat = request.form.get("fat")
 
         if "food_log" not in session: 
             session["food_log"] = []
-        session["food_log"].append({"name": food_name, "calories": calories})
+        session["food_log"].append({"name": food_name, "calories": calories, "protein": protein, "carbs": carbs, "fat": fat})
         session.modified = True
          
         if "food_history" not in session: 
@@ -60,7 +63,7 @@ def foodlog():
         existing = [f["name"] for f in session["food_history"]]
 
         if food_name not in existing:
-            session["food_history"].append({"name": food_name, "calories": calories})
+            session["food_history"].append({"name": food_name, "calories": calories, "protein": protein, "carbs": carbs, "fat": fat})
 
         return redirect("/homepage")
     food_history = session.get("food_history", [])
@@ -91,9 +94,15 @@ def homepage():
     deficit = adjust_calories(tdee, current_phase)
 
     totalcal = 0
+    totalpro = 0
+    totalcarb = 0
+    totalfat = 0
     food_log = session.get("food_log", [])
     for i in food_log: 
-        totalcal += int(i["calories"])
+        totalcal += int(i.get("calories") or 0)
+        totalpro += int(i.get("protein") or 0)
+        totalcarb += int(i.get("carbs") or 0)
+        totalfat += int(i.get("fat") or 0)
     remaining = deficit - totalcal
 
     phase_descriptions = {
@@ -105,7 +114,8 @@ def homepage():
     }
     descriptions = phase_descriptions.get(current_phase)
 
-    return render_template("homepage.html", name=name, phase=current_phase, descriptions=descriptions, calories=round(remaining,1), tdee=tdee)
+    return render_template("homepage.html", name=name, phase=current_phase, descriptions=descriptions, calories=round(remaining,1), 
+                           tdee=tdee, totalpro=totalpro, totalcarb=totalcarb, totalfat=totalfat)
 
 @app.route("/settings", methods=["GET", "POST"])
 def settings():
