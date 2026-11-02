@@ -1,39 +1,117 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Phased</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='homepage.css') }}">
     </head>
     <body>
-        <div class="header">
-            <h3>Hi {{ name }}!</h3>
-            <div class="head_buttons">
-                <a href="/foodlog"><button>+</button></a>
-                <a href="/settings"><button>:</button></a>
-            </div>
-        </div>
+        <div class="page">
+            <header class="header">
+                <span class="logo">Phased</span>
+                <nav class="head_buttons" aria-label="Main">
+                    <a class="pill pill--active" href="/homepage" aria-current="page">Dashboard</a>
+                    <a class="pill" href="/foodlog">Log food</a>
+                    <a class="pill" href="/settings">Settings</a>
+                </nav>
+            </header>
 
-        <div class="main">
-            <div class="phase_info">
-                <div class="circle">
-                    <p>{{ phase }}</p>
-                </div>
-                <div class="descrip">
-                    <p>{{ descriptions }}</p>
-                </div>
-            </div>
-            <div class="calorie_intake">
-                <div class="circle">
-                    <p>Remaining Calories:</p>
-                    <div class="number">
-                        <p>{{ calories }} kcal</p>
+            <section class="greeting">
+                <h1>Hi {{ name }}!</h1>
+                <p class="tagline">It's not you, it's your body. Here's today's picture.</p>
+            </section>
+
+            <div class="grid">
+                <section class="card" aria-labelledby="cal-title">
+                    <h2 id="cal-title">Today's calories</h2>
+                    <div class="calorie_intake">
+                        <svg class="ring" width="180" height="180" viewBox="0 0 180 180" role="img" aria-label="{{ calories }} kcal remaining">
+                            <circle cx="90" cy="90" r="70" fill="none" stroke="#f7d9e3" stroke-width="16"/>
+                            <circle cx="90" cy="90" r="70" fill="none" stroke="#c45c7a" stroke-width="16" stroke-linecap="round" stroke-dasharray="{{ ring }} 440" transform="rotate(-90 90 90)"/>
+                            <text x="90" y="94" text-anchor="middle" class="ring_num">{{ "{:,.0f}".format(calories) }}</text>
+                            <text x="90" y="118" text-anchor="middle" class="ring_label">kcal left</text>
+                        </svg>
+                        <dl class="stats">
+                            <div class="row"><dt>Target</dt><dd>{{ "{:,}".format(target) }}</dd></div>
+                            <div class="row"><dt>Eaten</dt><dd>{{ "{:,}".format(eaten) }}</dd></div>
+                            <div class="row"><dt>Phase adjustment</dt><dd>{% if adjustment %}{{ "%+d"|format(adjustment) }}{% else %}0{% endif %}</dd></div>
+                        </dl>
                     </div>
-                </div>
-                <div class="descrip">
-                    <p>Total Protein(g): {{ totalpro }}</p>
-                    <p>Total Carbs (g): {{ totalcarb }}</p>
-                    <p>Total Fat (g): {{ totalfat }}</p>
-                </div>
+                </section>
+
+                <section class="card" aria-labelledby="cycle-title">
+                    <h2 id="cycle-title">Your cycle</h2>
+                    <p class="phase_name">{% if phase != "Unknown" %}Day {{ cycle_day }} · {{ phase }} phase{% else %}{{ phase }}{% endif %}</p>
+                    <p class="descrip">{{ descriptions }}</p>
+                    {% if marker is not none %}
+                    <div class="timeline">
+                        <div class="bar">
+                            <span class="seg seg-menstrual{% if phase == 'Menstrual' %} is-current{% endif %}" style="flex:5"></span>
+                            <span class="seg seg-follicular{% if phase == 'Follicular' %} is-current{% endif %}" style="flex:9"></span>
+                            <span class="seg seg-ovulation{% if phase == 'Ovulation' %} is-current{% endif %}" style="flex:3"></span>
+                            <span class="seg seg-luteal{% if phase == 'Luteal' %} is-current{% endif %}" style="flex:12"></span>
+                        </div>
+                        <span class="marker" style="left: calc({{ marker }}% - 9px)"></span>
+                        <div class="labels">
+                            <span style="flex:5">Menstrual</span><span style="flex:9">Follicular</span><span style="flex:3">Ovulation</span><span style="flex:12">Luteal</span>
+                        </div>
+                    </div>
+                    {% endif %}
+                </section>
+            </div>
+
+            <div class="grid">
+                <section class="card" aria-labelledby="macro-title">
+                    <h2 id="macro-title">Macros</h2>
+                    <div>
+                        <div class="row"><span>Protein</span><span class="muted">{{ totalpro }} g</span></div>
+                        <div class="track"><i style="width: {{ pro_pct }}%; background: #b5546a"></i></div>
+                    </div>
+                    <div>
+                        <div class="row"><span>Carbs</span><span class="muted">{{ totalcarb }} g</span></div>
+                        <div class="track"><i style="width: {{ carb_pct }}%"></i></div>
+                    </div>
+                    <div>
+                        <div class="row"><span>Fat</span><span class="muted">{{ totalfat }} g</span></div>
+                        <div class="track"><i style="width: {{ fat_pct }}%; background:#e08aa0"></i></div>
+                    </div>
+                    <p class="muted small">Bars show the split of what you've logged today.</p>
+                </section>
+
+                <section class="card" aria-labelledby="log-title">
+                    <h2 id="log-title">Food log</h2>
+                    {% for item in food_log %}
+                    <div class="row"><span>{{ item.name }}</span><b>{{ item.calories or 0 }}</b></div>
+                    {% else %}
+                    <p class="muted">Nothing logged yet.</p>
+                    {% endfor %}
+                    {% if food_history %}
+                    <p class="muted small">Quick add from history</p>
+                    <div class="chips">
+                        {% for food in food_history %}
+                        <form method="POST" action="/foodlog">
+                            <input type="hidden" name="food_name" value="{{ food.name }}">
+                            <input type="hidden" name="calories" value="{{ food.calories }}">
+                            <input type="hidden" name="protein" value="{{ food.protein }}">
+                            <input type="hidden" name="carbs" value="{{ food.carbs }}">
+                            <input type="hidden" name="fat" value="{{ food.fat }}">
+                            <button type="submit" class="chip">{{ food.name }}</button>
+                        </form>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    <a class="btn" href="/foodlog">Log food</a>
+                </section>
+
+                <section class="card" aria-labelledby="journey-title">
+                    <h2 id="journey-title">Your journey</h2>
+                    <p class="big">{{ weight }} {{ weight_unit }}</p>
+                    {% if to_go is not none %}
+                    <p>{{ to_go }} {{ weight_unit }} to go until your goal of {{ goal_weight }} {{ weight_unit }}.</p>
+                    {% endif %}
+                    <a class="btn" href="/settings">Update weight</a>
+                </section>
             </div>
         </div>
     </body>
