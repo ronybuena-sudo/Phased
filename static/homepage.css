@@ -5,94 +5,255 @@
 }
 
 body {
-    background-color: #fff5f7;
+    background: radial-gradient(ellipse at center, #f7d9e3 0%, #fff5f7 80%) fixed, #fff5f7;
     font-family: 'Georgia', serif;
-    display: flex;
-    flex-direction: column;
-}
-
-h3 {
-    color: #b5546a;
-    font-size: 1.5rem;
-    padding-bottom: 10px;
-}
-button {
-    display: block;
-    border-radius: 25px;
-    margin: 10px auto;
-    padding: 12px 40px;
-    border: 2px solid #e08aa0;
-    background-color: transparent;
-    color: #c45c7a;
-    font-size: 1rem;
-}
-
-p {
-    color: #b5546a;
-    font-size: 1rem;
-    padding-bottom: 10px;
+    color: #8f3f59;
+    min-height: 100vh;
 }
 
 a {
     text-decoration: none;
 }
 
-.number {
-    color: #b5546a;
-    font-size: 1rem;
-    padding-bottom: 10px;
-    font-weight: bold;
+p {
+    padding: 0;
 }
 
-.phase_info, .calorie_intake {
+.page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 24px 56px;
     display: flex;
-    align-items: center;
-    gap: 20px;
+    flex-direction: column;
+    gap: 24px;
 }
 
-.descrip {
-    width: 250px;
-    padding: 30px;
-    border: 3px solid #b5546a;
-    border-radius: 25px;
-    text-align:center;
-}
-
-.main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px;
-    gap: 60px;
-    background-color: #f7c5d5;
+.grid {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
 }
 
 .header {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
-    width: 100%;
+    gap: 16px;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #b5546a;
 }
 
 .head_buttons {
     display: flex;
-    gap: 10px;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-family: Arial, sans-serif;
 }
 
-button:hover {
-    background-color: #e08aa0;
-    color: white;
+.pill {
+    padding: 12px 20px;
+    border-radius: 999px;
+    border: 2px solid transparent;
+    color: #8f3f59;
 }
 
-.circle {
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    border: 3px solid #b5546a;
+.pill:hover {
+    background: #fde8ee;
+}
+
+.pill--active {
+    background: #fff;
+    border-color: #e08aa0;
+}
+
+h1 {
+    font-size: 2.75rem;
+    color: #b5546a;
+}
+
+.tagline {
+    font-size: 1.25rem;
+    font-style: italic;
+    color: #9a4a66;
+    margin-top: 4px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid #f0c4d1;
+    border-radius: 28px;
+    padding: 28px;
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
+    gap: 16px;
+}
 
+.card h2 {
+    font-size: 1.5rem;
+    font-style: italic;
+    color: #b5546a;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.05rem;
+}
+
+.muted {
+    color: #7d4a5c;
+}
+
+.small {
+    font-size: 0.85rem;
+}
+
+.big {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+
+.calorie_intake {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 28px;
+}
+
+.ring_num {
+    font-family: 'Georgia', serif;
+    font-size: 38px;
+    font-weight: bold;
+    fill: #8f3f59;
+}
+
+.ring_label {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    fill: #7d4a5c;
+}
+
+.stats {
+    flex: 1;
+    min-width: 160px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.stats dd {
+    font-weight: bold;
+}
+
+.phase_name {
+    font-size: 1.75rem;
+    font-weight: bold;
+}
+
+.descrip {
+    font-size: 1.05rem;
+    line-height: 1.5;
+}
+
+.timeline {
+    position: relative;
+    padding-top: 14px;
+}
+
+.bar {
+    display: flex;
+    gap: 4px;
+    height: 16px;
+}
+
+.seg {
+    background: #f3d3de;
+}
+
+.seg-menstrual { background: #e9b3c3; border-radius: 999px 0 0 999px; }
+.seg-ovulation { background: #f9e7ed; }
+.seg-luteal    { background: #e9b3c3; border-radius: 0 999px 999px 0; }
+.seg.is-current { background: #c45c7a; }
+
+.marker {
+    position: absolute;
+    top: 11px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #fff;
+    border: 4px solid #8f3f59;
+    box-sizing: content-box;
+}
+
+.labels {
+    display: flex;
+    gap: 4px;
+    margin-top: 8px;
+    font-size: 0.8rem;
+    color: #7d4a5c;
+}
+
+.track {
+    height: 12px;
+    border-radius: 999px;
+    background: #f7d9e3;
+    overflow: hidden;
+    margin-top: 8px;
+}
+
+.track i {
+    display: block;
+    height: 100%;
+    border-radius: 999px;
+    background: #c45c7a;
+}
+
+/* buttons and chips */
+.btn {
+    align-self: center;
+    border-radius: 25px;
+    padding: 12px 40px;
+    border: 2px solid #e08aa0;
+    background-color: transparent;
+    color: #8f3f59;
+    font-family: Arial, sans-serif;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: #b5546a;
+    border-color: #b5546a;
+    color: #fff;
+}
+
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.chip {
+    font-family: 'Georgia', serif;
+    font-size: 0.95rem;
+    color: #8f3f59;
+    background: #fff;
+    border: 1px solid #b5546a;
+    border-radius: 999px;
+    padding: 8px 16px;
+    min-height: 44px;
+    cursor: pointer;
+}
+
+.chip:hover {
+    background: #fde8ee;
 }

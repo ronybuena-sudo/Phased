@@ -104,7 +104,32 @@ def homepage():
         totalcarb += int(i.get("carbs") or 0)
         totalfat += int(i.get("fat") or 0)
     remaining = deficit - totalcal
+    target = deficit 
+    cycle_day = (date.today() - last_period).days + 1
 
+    if current_phase == "Unknown": 
+        marker = None 
+    else:
+        round((cycle_day - 0.5) / 29 * 100, 1)
+
+    if target > 0:
+        ring = round(min(max(totalcal / target, 0)), 1)
+    else: 
+        0
+    adjustment = round(target - tdee)
+
+    macro_total = totalpro + totalcarb + totalfat
+    def share(x): 
+        if macro_total: 
+            return round(x / macro_total * 100)
+        else: 
+            return 0
+
+    try: 
+        to_go = round(abs(weight - float(goal_weight)), 1)
+    except: 
+        to_go = None
+    
     phase_descriptions = {
         "Menstrual": "Your body is shedding its lining. Be sure to rest and eat lots of iron rich foods!",
         "Follicular": "Energy is going up! Best time to focus on your goals!",
@@ -115,7 +140,12 @@ def homepage():
     descriptions = phase_descriptions.get(current_phase)
 
     return render_template("homepage.html", name=name, phase=current_phase, descriptions=descriptions, calories=round(remaining,1), 
-                           tdee=tdee, totalpro=totalpro, totalcarb=totalcarb, totalfat=totalfat)
+                           tdee=tdee, totalpro=totalpro, totalcarb=totalcarb, totalfat=totalfat,
+                           target=round(target), eaten=totalcal, ring=ring, adjustment=adjustment,
+                           cycle_day=cycle_day, marker=marker,
+                           pro_pct=share(totalpro), carb_pct=share(totalcarb), fat_pct=share(totalfat),
+                           food_log=food_log[-6:], food_history=session.get("food_history", [])[:4],
+                           weight=weight, goal_weight=goal_weight, weight_unit=weight_unit, to_go=to_go)
 
 @app.route("/settings", methods=["GET", "POST"])
 def settings():
