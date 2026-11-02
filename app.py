@@ -106,16 +106,8 @@ def homepage():
     remaining = deficit - totalcal
     target = deficit 
     cycle_day = (date.today() - last_period).days + 1
-
-    if current_phase == "Unknown": 
-        marker = None 
-    else:
-        round((cycle_day - 0.5) / 29 * 100, 1)
-
-    if target > 0:
-        ring = round(min(max(totalcal / target, 0)), 1)
-    else: 
-        0
+    marker = None if current_phase == "Unknown" else round((cycle_day - 0.5) / 29 * 100, 1)
+    ring = round(min(max(totalcal / target, 0), 1) * 440) if target > 0 else 0
     adjustment = round(target - tdee)
 
     macro_total = totalpro + totalcarb + totalfat
