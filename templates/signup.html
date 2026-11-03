@@ -1,26 +1,40 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Phased</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@700&family=Inter:wght@400;500&family=Newsreader:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}">
     </head>
     <body>
-        <div class="container">
-            <div class="glow"></div>
-            <div class="content">
-                <h1>Happy to have you!</h1>
+         <aside class="side">
+            <a class="logo" href="/">phased.</a>
+            <div class="side_body">
+                <h1>happy to have you!</h1>
+            </div>
+        </aside>
+
+        <main class="main">
+            <a class="back" href="/">back</a>
+            <form>
                 <div>
-                    <input type="username" id="username" name="username" placeholder="Create a username">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Create a username">
                 </div>
                 <div>
+                    <label for="email">Email</label>
                     <input type="email" id="email" name="email" placeholder="Enter your email">
                 </div>
                 <div>
+                    <label for="password">Password</label>
                     <input type="password" id="password" name="password" placeholder="Enter your password">
                 </div>
-                <a href="/onboard1"><button>Sign Up</button></a>
-                <a href="/login"><p>Already have an account? Login!</p></a>
-            </div>
-        </div>
+                <a class="btn" href="/onboard1">Sign Up</a>
+                <p class="alt">Already have an account? <a href="/login">Login!</a></p>
+            </form>
+        </main>
     </body>
 </html>

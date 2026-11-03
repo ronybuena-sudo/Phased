@@ -1,0 +1,131 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', Arial, sans-serif;
+    color: #5c2d3f;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 40% 1fr;
+}
+
+.side {
+    background: #a85c72;
+    color: #fff;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    font-family: 'IBM Plex Sans', Arial, sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #fff;
+    text-decoration: none;
+}
+
+.side_body {
+    margin: auto 0;
+    padding-bottom: 60px;
+}
+
+.side h1 {
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 700;
+    font-size: 2.75rem;
+    line-height: 1.35;
+}
+
+.main {
+    background: #fbf5f7;
+    position: relative;
+    padding: 40px;
+    display: flex;
+}
+
+.back {
+    position: absolute;
+    top: 32px;
+    right: 32px;
+    background: #b5607a;
+    color: #fff;
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 0.95rem;
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+.back:hover {
+    background: #a05c6c;
+}
+
+form {
+    width: 100%;
+    max-width: 420px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+label {
+    display: block;
+    font-weight: 500;
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+input {
+    width: 100%;
+    font-family: inherit;
+    font-size: 1rem;
+    color: #5c2d3f;
+    background: #fff;
+    border: 1px solid #d9b8c3;
+    border-radius: 8px;
+    padding: 12px 16px;
+}
+
+input:focus {
+    outline: 2px solid #a85c72;
+    outline-offset: 1px;
+}
+
+.btn {
+    display: inline-block;
+    text-decoration: none;
+    align-self: flex-start;
+    background: #a85c72;
+    color: #fff;
+    font: 500 1rem 'Inter', Arial, sans-serif;
+    padding: 14px 32px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #8f4a60;
+}
+
+.alt {
+    font-size: 0.95rem;
+}
+
+.alt a {
+    color: #8f3f59;
+    text-decoration: underline;
+}
+
+@media (max-width: 760px) {
+    body { grid-template-columns: 1fr; }
+    .side { padding: 24px; }
+    .side_body { margin: 32px 0 8px; padding-bottom: 0; }
+    .side h1 { font-size: 2rem; }
+    .main { padding: 80px 24px 40px; }
+}
