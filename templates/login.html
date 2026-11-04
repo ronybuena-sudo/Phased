@@ -11,22 +11,36 @@
     </head>
     <body>
         <aside class="side">
+            <div class="circles" aria-hidden="true">
+                <span class="circle c1"></span>
+                <span class="circle c2"></span>
+                <span class="circle c3"></span>
+                <span class="circle c4"></span>
+                <span class="circle c5"></span>
+                <span class="circle c6"></span>
+            </div>
             <a class="logo" href="/">phased.</a>
             <div class="side_body">
-                <h1>welcome back!</h1>
+                <p class="eyebrow">Welcome back</p>
+                <h1>good to see you again</h1>
+                <p class="side_text">Pick up where you left off. Your plan adapts to your cycle every day.</p>
             </div>
         </aside>
 
         <main class="main">
             <a class="back" href="/">back</a>
-            <form>
+            <form class="f">
+                <div>
+                    <h2>Log in</h2>
+                    <p class="sub">Enter your details to continue.</p>
+                </div>
                 <div>
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Enter your email">
+                    <input type="email" id="email" name="email" placeholder="Enter your email" autocomplete="email">
                 </div>
                 <div>
                     <label for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Enter your password">
+                    <input type="password" id="password" name="password" placeholder="Enter your password" autocomplete="current-password">
                 </div>
                 <button class="btn" type="button">Login</button>
                 <p class="alt">Don’t have an account? <a href="/signup">Sign Up!</a></p>

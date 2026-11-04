@@ -11,26 +11,40 @@
     </head>
     <body>
          <aside class="side">
+            <div class="circles" aria-hidden="true">
+                <span class="circle c1"></span>
+                <span class="circle c2"></span>
+                <span class="circle c3"></span>
+                <span class="circle c4"></span>
+                <span class="circle c5"></span>
+                <span class="circle c6"></span>
+            </div>
             <a class="logo" href="/">phased.</a>
             <div class="side_body">
+                <p class="eyebrow">Join Phased</p>
                 <h1>happy to have you!</h1>
+                <p class="side_text">Nutrition that listens to your body, energy and lifestyle. No guilt required.</p>
             </div>
         </aside>
 
         <main class="main">
             <a class="back" href="/">back</a>
-            <form>
+            <form class="f">
+                <div>
+                    <h2>Create your account</h2>
+                    <p class="sub">It only takes a minute.</p>
+                </div>
                 <div>
                     <label for="username">Username</label>
-                    <input type="text" id="username" name="username" placeholder="Create a username">
+                    <input type="text" id="username" name="username" placeholder="Create a username" autocomplete="username">
                 </div>
                 <div>
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Enter your email">
+                    <input type="email" id="email" name="email" placeholder="Enter your email" autocomplete="email">
                 </div>
                 <div>
                     <label for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Enter your password">
+                    <input type="password" id="password" name="password" placeholder="Enter your password" autocomplete="new-password">
                 </div>
                 <a class="btn" href="/onboard1">Sign Up</a>
                 <p class="alt">Already have an account? <a href="/login">Login!</a></p>

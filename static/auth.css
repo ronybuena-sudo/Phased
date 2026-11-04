@@ -13,9 +13,10 @@ body {
 }
 
 .side {
+    position: relative;
     background: #a85c72;
     color: #fff;
-    padding: 40px;
+    padding: 40px 56px;
     display: flex;
     flex-direction: column;
 }
@@ -26,19 +27,54 @@ body {
     font-size: 1.2rem;
     color: #fff;
     text-decoration: none;
+    position: relative;
+
 }
 
 .side_body {
     margin: auto 0;
     padding-bottom: 60px;
+    max-width: 460px;
+    position: relative;
+}
+
+.eyebrow {
+    font-size: 0.8rem; 
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
 }
 
 .side h1 {
     font-family: 'Newsreader', Georgia, serif;
     font-weight: 700;
-    font-size: 2.75rem;
-    line-height: 1.35;
+    font-size: 3rem;
+    line-height: 1.15;
+    margin: 12px 0 16px;
 }
+
+.side_text {
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.circles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+}
+
+.c1 { width: 340px; height: 340px; top: -110px; right: -90px;  background: linear-gradient(135deg, rgba(255,255,255,.26), rgba(255,255,255,.03)); }
+.c2 { width: 190px; height: 190px; top: 19%;    right: -60px;  background: radial-gradient(circle at 30% 30%, rgba(255,214,226,.22), rgba(255,255,255,.02)); }
+.c3 { width: 90px;  height: 90px;  top: 58%;    right: 60px;   background: linear-gradient(135deg, rgba(255,255,255,.22), rgba(255,255,255,.02)); }
+.c4 { width: 300px; height: 300px; bottom: -110px; left: -90px; background: linear-gradient(160deg, rgba(0,0,0,.18), rgba(0,0,0,.02)); }
+.c5 { width: 60px;  height: 60px;  top: 14%;    left: 52%;     background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.3), rgba(255,255,255,.04)); }
+.c6 { width: 150px; height: 150px; bottom: 150px; right: -40px; background: radial-gradient(circle at 35% 35%, rgba(255,214,226,.26), rgba(255,255,255,.03)); }
 
 .main {
     background: #fbf5f7;
@@ -58,6 +94,23 @@ body {
     padding: 8px 16px;
     border-radius: 8px;
     text-decoration: none;
+}
+
+.f {
+    width: 100%;
+    max-width: 420px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+ 
+h2 {
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 600;
+    font-size: 2.25rem;
+    color: #8f3f59;
+    margin-bottom: 6px;
 }
 
 .back:hover {
