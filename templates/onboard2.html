@@ -1,34 +1,58 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Phased</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@700&family=Inter:wght@400;500;600&family=Newsreader:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}">
     </head>
     <body>
-        <div class="container">
-            <div class="glow"></div>
-            <div class="content">
-                <h1>Your journey is only beginning</h1>
-                <form method="POST" action="/onboard2">
+        <aside class="side">
+            <div class="circles" aria-hidden="true">
+                <span class="circle c1"></span>
+                <span class="circle c2"></span>
+                <span class="circle c3"></span>
+                <span class="circle c4"></span>
+                <span class="circle c5"></span>
+                <span class="circle c6"></span>
+            </div>
+            <a class="logo" href="/">phased.</a>
+            <div class="side_body">
+                <p class="eyebrow">Step 2 of 3</p>
+                <h1>your journey is only beginning</h1>
+                <p class="side_text">Set a goal and a pace that feels right for you.</p>
+            </div>
+        </aside>
+        <main class="main">
+            <a class="back" href="/onboard1">back</a>
+            <form class="f" method="POST" action="/onboard2">
                 <div>
-                    <h2>What's your goal weight?</h2>
-                    <input type="number" id="goal_weight" name="goal_weight" placeholder="Enter Your Goal Weight">
-                    <select name="weight_unit" id="weight_unit">
-                        <option value="kg">kg</option>
-                        <option value="lbs">lbs</option>
-                    </select>    
-                </div>            
+                    <h2>Your goal</h2>
+                    <p class="sub">Tell us where you’re headed.</p>
+                </div>
                 <div>
-                    <h2>How much weight do you want to lose per week?</h2>
+                    <label for="goal_weight">What’s your goal weight?</label>
+                    <div class="row">
+                        <input type="number" id="goal_weight" name="goal_weight" placeholder="Enter your goal weight">
+                        <select name="weight_unit" aria-label="Unit">
+                            <option value="kg">kg</option>
+                            <option value="lbs">lbs</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label for="weightloss">How much weight do you want to lose per week?</label>
                     <select name="weightloss" id="weightloss">
                         <option value="1">-1.0 lb / -0.454 kg per week</option>
                         <option value=".75">-.75 lb / -0.340 kg per week</option>
                         <option value=".5">-0.5 lb / -0.23 kg per week</option>
                     </select>
                 </div>
-                <button type="submit">Next</button>
-                </form>
-            </div>
-        </div>
+                <button class="btn" type="submit">Next</button>
+            </form>
+        </main>
     </body>
 </html>

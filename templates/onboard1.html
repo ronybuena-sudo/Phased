@@ -1,44 +1,68 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Phased</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@700&family=Inter:wght@400;500;600&family=Newsreader:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}">
     </head>
     <body>
-        <div class="container">
-            <div class="glow"></div>
-            <div class="content">
-                <h1>Let's get to know you</h1>
-                <form method="POST" action="/onboard1">
-                <div>
-                    <h2>What's your name?</h2>
-                    <input type="text" id="name" name="name" placeholder="Enter Your Name">
-                </div>
-                <div>
-                    <h2>How old are you?</h2>
-                    <input type="number" id="age" name="age" placeholder="Enter Your Age">
-                </div>
-                <div>
-                    <h2>What is your height?</h2>
-                    <input type="number" id="height" name="height" placeholder="Enter Your Height">
-                    <select name="height_unit" id="height_unit">
-                        <option value="cm">cm</option>
-                        <option value="inches">inches</option>
-                    </select>
-                </div>
-                <div>
-                    <h2>What is your current weight?</h2>
-                    <input type="number" id="weight" name="weight" placeholder="Enter Your Weight">
-                    <select name="weight_unit" id="weight_unit">
-                        <option value="kg">kg</option>
-                        <option value="lbs">lbs</option>
-                    </select>
-                </div>
-                <button type="submit">Next</button>
-                </form>
+        <aside class="side">
+            <div class="circles" aria-hidden="true">
+                <span class="circle c1"></span>
+                <span class="circle c2"></span>
+                <span class="circle c3"></span>
+                <span class="circle c4"></span>
+                <span class="circle c5"></span>
+                <span class="circle c6"></span>
             </div>
-        </div>
-
-        
+            <a class="logo" href="/">phased.</a>
+            <div class="side_body">
+                <p class="eyebrow">Step 1 of 3</p>
+                <h1>let’s get to know you</h1>
+                <p class="side_text">A few quick details so we can tailor your plan.</p>
+            </div>
+        </aside>
+        <main class="main">
+            <a class="back" href="/signup">back</a>
+            <form class="f" method="POST" action="/onboard1">
+                <div>
+                    <h2>About you</h2>
+                    <p class="sub">Tell us a little about yourself.</p>
+                </div>
+                <div>
+                    <label for="name">What’s your name?</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name">
+                </div>
+                <div>
+                    <label for="age">How old are you?</label>
+                    <input type="number" id="age" name="age" placeholder="Enter your age">
+                </div>
+                <div>
+                    <label for="height">What is your height?</label>
+                    <div class="row">
+                        <input type="number" id="height" name="height" placeholder="Enter your height">
+                        <select name="height_unit" aria-label="Unit">
+                            <option value="cm">cm</option>
+                            <option value="inches">inches</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label for="weight">What is your current weight?</label>
+                    <div class="row">
+                        <input type="number" id="weight" name="weight" placeholder="Enter your weight">
+                        <select name="weight_unit" aria-label="Unit">
+                            <option value="kg">kg</option>
+                            <option value="lbs">lbs</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn" type="submit">Next</button>
+            </form>
+        </main>
     </body>
 </html>
