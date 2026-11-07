@@ -146,14 +146,16 @@ def settings():
             session["period"] = request.form.get("period")
         if request.form.get("weight"):
             session["weight"] = request.form.get("weight")
-        if request.form.get("weight_unit"):
-            session["weight_unit"] = request.form.get("weight_unit")
+            if request.form.get("weight_unit"):
+                session["weight_unit"] = request.form.get("weight_unit")
         if request.form.get("goal_weight"):
             session["goal_weight"] = request.form.get("goal_weight")
         if request.form.get("activity"):
             session["activity"] = request.form.get("activity")
         return redirect("/homepage")
-    return render_template("settings.html")
+    return render_template("settings.html", period=session.get("period"), weight=session.get("weight"),
+                           goal_weight=session.get("goal_weight"), weight_unit=session.get("weight_unit", "kg"),
+                           activity=session.get("activity"))
 
 if __name__ == "__main__":
     app.run(debug=True)

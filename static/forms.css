@@ -1,0 +1,56 @@
+.settings_grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr));
+}
+
+.card label {
+    font-weight: inherit;
+}
+
+.current {
+    font-size: 0.95rem;
+    color: #7d4a5c;
+}
+
+.card input,
+.card select {
+    width: 100%;
+    font-family: 'Georgia', serif;
+    font-size: 1rem;
+    color: #5c2d3f;
+    background: #fff;
+    border: 1px solid #b5546a;
+    border-radius: 999px;
+    padding: 12px 20px;
+}
+
+.card input:focus,
+.card select:focus {
+    outline: 2px solid #c45c7a;
+    outline-offset: 1px;
+}
+
+.row2 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.row2 select {
+    width: 110px;
+    flex: none;
+}
+
+.unit {
+    font-weight: bold;
+    min-width: 40px;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+}
+
+button.btn {
+    cursor: pointer;
+}

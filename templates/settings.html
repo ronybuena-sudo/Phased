@@ -1,49 +1,77 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Phased</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    </head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='homepage.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='forms.css') }}">    </head>
     <body>
-        <a href="/homepage"><button class="back_button">Back to Home</button></a>
-        <div class="container">
-            <div class="glow"></div>
-            <div class="content">
-                <h1>Settings</h1>  
-                <form method="POST" action="/settings">
-                    <div> 
-                        <h2>Update Your Last Period</h2>
+         <div class="page">
+            <header class="header">
+                <span class="logo">phased.</span>
+                <nav class="head_buttons" aria-label="Main">
+                    <a class="pill" href="/homepage">Dashboard</a>
+                    <a class="pill" href="/foodlog">Log food</a>
+                    <a class="pill pill--active" href="/settings" aria-current="page">Settings</a>
+                </nav>
+            </header>
+
+            <section class="greeting">
+                <h1>Settings</h1>
+                <p class="tagline">Update anything that has changed. Leave the rest blank.</p>
+            </section>
+
+            <form method="POST" action="/settings">
+                <div class="grid settings_grid">
+                    <section class="card">
+                        <h2><label for="period">Last period</label></h2>
+                        <p class="current">Currently: {{ period or "not set" }}</p>
                         <input type="date" id="period" name="period">
-                    </div>
-                    <div>
-                        <h2>Update Your Weight</h2>
-                        <input type="number" id="weight" name="weight">
-                        <select name="weight_unit" id="weight_unit">
-                            <option value="kg">kg</option>
-                            <option value="lbs">lbs</option>
-                        </select>
-                    </div>
-                    <div>
-                        <h2>Update Your Goal Weight</h2>
-                        <input type="number" id="goal_weight" name="goal_weight">
-                        <select name="weight_unit" id="weight_unit">
-                            <option value="kg">kg</option>
-                            <option value="lbs">lbs</option>
-                        </select>    
-                    </div>
-                    <div>
-                        <h2>Update Your Activity Level</h2>
+                    </section>
+
+                    <section class="card">
+                        <h2><label for="weight">Weight</label></h2>
+                        <p class="current">Currently: {% if weight %}{{ weight }} {{ weight_unit }}{% else %}not set{% endif %}</p>
+                        <div class="row2">
+                            <input type="number" step="any" id="weight" name="weight" placeholder="Enter new weight">
+                            <select name="weight_unit" aria-label="Weight unit">
+                                <option value="kg" {% if weight_unit == "kg" %}selected{% endif %}>kg</option>
+                                <option value="lbs" {% if weight_unit == "lbs" %}selected{% endif %}>lbs</option>
+                            </select>
+                        </div>
+                        <p class="current">Switching units? Update your goal weight too.</p>
+                    </section>
+
+                    <section class="card">
+                        <h2><label for="goal_weight">Goal weight</label></h2>
+                        <p class="current">Currently: {% if goal_weight %}{{ goal_weight }} {{ weight_unit }}{% else %}not set{% endif %}</p>
+                        <div class="row2">
+                            <input type="number" step="any" id="goal_weight" name="goal_weight" placeholder="Enter new goal weight">
+                            <select name="weight_unit" aria-label="Weight unit">
+                                <option value="kg" {% if weight_unit == "kg" %}selected{% endif %}>kg</option>
+                                <option value="lbs" {% if weight_unit == "lbs" %}selected{% endif %}>lbs</option>
+                            </select>
+                        </div>
+                    </section>
+
+                    <section class="card">
+                        <h2><label for="activity">Activity level</label></h2>
+                        <p class="current">Currently: {{ (activity or "not set")|capitalize }}</p>
                         <select name="activity" id="activity">
-                            <option value="">Keep Current</option>
+                            <option value="">Keep current</option>
                             <option value="sedentary">Little to No Activity</option>
                             <option value="lightly active">Lightly Active (1-3 days per week)</option>
                             <option value="moderately active">Moderately Active (3-5 days per week)</option>
                             <option value="very active">Very Active (6-7 days per week)</option>
-                        </select>    
-                    </div>
-                <button type="submit">Save Changes</button>
-            </form>   
-            </div>  
-        </div> 
+                        </select>
+                    </section>
+                </div>
+
+                <div class="actions">
+                    <button class="btn" type="submit">Save Changes</button>
+                </div>
+            </form>
+        </div>
     </body>
 </html>
