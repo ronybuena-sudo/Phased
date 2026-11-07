@@ -48,10 +48,7 @@
                         <p class="current">Currently: {% if goal_weight %}{{ goal_weight }} {{ weight_unit }}{% else %}not set{% endif %}</p>
                         <div class="row2">
                             <input type="number" step="any" id="goal_weight" name="goal_weight" placeholder="Enter new goal weight">
-                            <select name="weight_unit" aria-label="Weight unit">
-                                <option value="kg" {% if weight_unit == "kg" %}selected{% endif %}>kg</option>
-                                <option value="lbs" {% if weight_unit == "lbs" %}selected{% endif %}>lbs</option>
-                            </select>
+                            <span class="unit">{{ weight_unit }}</span>
                         </div>
                     </section>
 
@@ -59,7 +56,7 @@
                         <h2><label for="activity">Activity level</label></h2>
                         <p class="current">Currently: {{ (activity or "not set")|capitalize }}</p>
                         <select name="activity" id="activity">
-                            <option value="">Keep current</option>
+                            <option value="">Keep Current</option>
                             <option value="sedentary">Little to No Activity</option>
                             <option value="lightly active">Lightly Active (1-3 days per week)</option>
                             <option value="moderately active">Moderately Active (3-5 days per week)</option>
