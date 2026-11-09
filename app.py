@@ -1,8 +1,10 @@
+import os
 from flask import Flask, render_template, request, session, redirect
 from calculations import calculate_bmr, calculate_tdee, get_current_phase, adjust_calories
+from dotenv import load_dotenv
 
 app = Flask(__name__)
-app.secret_key = "phased1"
+app.secret_key = os.environ.get("SECRET_KEY", "dev-only-change-me")
 
 @app.route("/")
 def home():
