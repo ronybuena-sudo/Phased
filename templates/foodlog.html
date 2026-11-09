@@ -1,44 +1,95 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Phased</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='homepage.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='forms.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='foodlog.css') }}">
     </head>
-    <body> 
-        <a href="/homepage"><button class="back_button">Back to Home</button></a>
-        <div class="container">
-            <div class="glow"></div>
-            <form method="POST" action="/foodlog">
-                <div class="recipe_maker">
-                    <h2>Had a good meal? Let's track it!</h2>
-                    <div>
-                        <input type="text" id="food_name" name="food_name" placeholder="Food Name">
-                    </div>
-                    <div>
-                        <input type="number" id="calories" name="calories" placeholder="Calorie Count">
-                    </div>
-                    <div>
-                        <input type="number" id="protein" name="protein" placeholder="Protein (g)">
-                    </div>
-                    <div>
-                        <input type="number" id="carbs" name="carbs" placeholder="Carbs (g)">
-                    </div>
-                    <div>
-                        <input type="number" id="fat" name="fat" placeholder="Fat (g)">
-                    </div>
-                    <button type="submit">Log Food</button>
-                </div>
+    <body>
+        <div class="page">
+            <header class="header">
+                <span class="logo">phased.</span>
+                <nav class="head_buttons" aria-label="Main">
+                    <a class="pill" href="/homepage">Dashboard</a>
+                    <a class="pill pill--active" href="/foodlog" aria-current="page">Log food</a>
+                    <a class="pill" href="/settings">Settings</a>
+                </nav>
+            </header>
 
-                <div class="food_history">
-                    {% for food in food_history %}
-                    <form method="POST" action="/foodlog">
-                        <input type="hidden" name="food_name" value="{{ food.name }}">
-                        <input type="hidden" name="calories" value="{{ food.calories }}">
-                        <button type="submit">{{ food.name }} — {{ food.calories }} kcal</button>
+            <section class="greeting">
+                <h1>Log food</h1>
+                <p class="tagline">Had a good meal? Let’s track it.</p>
+            </section>
+
+            <div class="grid foodlog_grid">
+                <section class="card" aria-labelledby="add-title">
+                    <h2 id="add-title">Add a meal</h2>
+                    <form class="stack" method="POST" action="/foodlog">
+                        <div>
+                            <label for="food_name">Food name</label>
+                            <input type="text" id="food_name" name="food_name" placeholder="e.g. Greek yogurt" required>
+                        </div>
+                        <div>
+                            <label for="calories">Calories</label>
+                            <input type="number" min="0" id="calories" name="calories" placeholder="kcal" required>
+                        </div>
+                        <div class="macros">
+                            <div>
+                                <label for="protein">Protein (g)</label>
+                                <input type="number" min="0" id="protein" name="protein" placeholder="0">
+                            </div>
+                            <div>
+                                <label for="carbs">Carbs (g)</label>
+                                <input type="number" min="0" id="carbs" name="carbs" placeholder="0">
+                            </div>
+                            <div>
+                                <label for="fat">Fat (g)</label>
+                                <input type="number" min="0" id="fat" name="fat" placeholder="0">
+                            </div>
+                        </div>
+                        <button class="btn" type="submit">Log food</button>
                     </form>
+                </section>
+
+                <section class="card" aria-labelledby="quick-title">
+                    <h2 id="quick-title">Quick add</h2>
+                    {% for food in food_history %}
+                    <div class="history_item">
+                        <div>
+                            <b>{{ food.name }}</b>
+                            <span class="current">{{ food.calories or 0 }} kcal · P {{ food.protein or 0 }} · C {{ food.carbs or 0 }} · F {{ food.fat or 0 }}</span>
+                        </div>
+                        <form method="POST" action="/foodlog">
+                            <input type="hidden" name="food_name" value="{{ food.name }}">
+                            <input type="hidden" name="calories" value="{{ food.calories }}">
+                            <input type="hidden" name="protein" value="{{ food.protein }}">
+                            <input type="hidden" name="carbs" value="{{ food.carbs }}">
+                            <input type="hidden" name="fat" value="{{ food.fat }}">
+                            <button class="mini" type="submit" aria-label="Add {{ food.name }} again">Add</button>
+                        </form>
+                    </div>
+                    {% else %}
+                    <p class="current">Foods you log will show up here so you can add them again with one tap.</p>
                     {% endfor %}
-                </div>
-            </form>
+                </section>
+
+                <section class="card" aria-labelledby="today-title">
+                    <h2 id="today-title">Logged today</h2>
+                    {% set ns = namespace(total=0) %}
+                    {% for item in food_log %}
+                    {% set ns.total = ns.total + (item.calories|int) %}
+                    <div class="row"><span>{{ item.name }}</span><b>{{ item.calories or 0 }}</b></div>
+                    {% else %}
+                    <p class="current">Nothing logged yet.</p>
+                    {% endfor %}
+                    {% if food_log %}
+                    <div class="row total"><span>Total</span><b>{{ ns.total }} kcal</b></div>
+                    {% endif %}
+                </section>
+            </div>
         </div>
     </body>
 </html>

@@ -67,7 +67,7 @@ def foodlog():
 
         return redirect("/homepage")
     food_history = session.get("food_history", [])
-    return render_template("foodlog.html", food_history=food_history)
+    return render_template("foodlog.html", food_history=food_history, food_log=session.get("food_log", []))
     
 @app.route("/homepage")
 def homepage():
